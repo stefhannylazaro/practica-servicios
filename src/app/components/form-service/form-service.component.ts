@@ -8,16 +8,16 @@ import {Servicio} from '../../models/Servicio';
 export class FormServiceComponent implements OnInit {
   @Input() public title:string;
   @Input() public objService:Servicio;
-  public service:Servicio;
+  //public service:Servicio;
   constructor() {
-    this.objService=new Servicio(0,"","",1);
+    //this.objService=new Servicio(0,"","",1);
   }
 
   ngOnInit() {
   }
   onSubmit() {
     console.log("enviar");
-    console.log(this.service);
+    //console.log(this.service);
     
   }
 

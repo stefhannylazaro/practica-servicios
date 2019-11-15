@@ -36,7 +36,7 @@ export class HomeComponent implements OnInit {
      ];
      this.selected=0;
      this.display="none";
-     this.subtitle="Crear servicio";
+     this.subtitle="Crear";
      this.subtitleEdit="Editar";
      this.service=new Servicio(0,"","",0);
   }
