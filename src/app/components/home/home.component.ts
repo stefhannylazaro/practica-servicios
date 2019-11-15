@@ -12,6 +12,11 @@ export class HomeComponent implements OnInit {
   public mostrar:boolean;
   public tipos:Array<any>;
   public selected:Number;
+  public display:String;
+  public subtitle:String;//para el form
+  public subtitleEdit:String;
+  public service:Servicio;//obj para crear serv
+  public serviceEdit:Servicio;//obj a editar
   constructor() {
     this.titulo="Servicios";
     this.servicios=[
@@ -30,6 +35,10 @@ export class HomeComponent implements OnInit {
        {id:3,nombre:"Hogar"}
      ];
      this.selected=0;
+     this.display="none";
+     this.subtitle="Crear servicio";
+     this.subtitleEdit="Editar";
+     this.service=new Servicio(0,"","",0);
   }
 
   ngOnInit() {//inicializa el componente 
@@ -50,6 +59,13 @@ export class HomeComponent implements OnInit {
       this.filServicios=this.servicios;
       console.log(this.filServicios);
     }
+  }
+  showService(objService){
+    this.serviceEdit=objService;
+    this.display="block";
+  }
+  closeModal(){
+    this.display="none";
   }
 
 }

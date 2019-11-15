@@ -1,19 +1,22 @@
-<form>
+<form #formService="ngForm" (ngSubmit)="onSubmit()">
+    <h5 class="mb-3">{{title}}</h5>
     <div class="form-group">
       <label for="nombre">Nombre</label>
-      <input type="text" class="form-control" name="nombre">
+      <input type="text" class="form-control" name="nombre" #nombre="ngModel" [(ngModel)]="objService.nombre" required>
+      <small class="form-text msg-error" *ngIf="nombre.invalid && nombre.touched">Nombre incorrecto</small>
     </div>
     <div class="form-group">
         <label for="tipo">Tipo</label>
-        <select class="form-control" name="tipo">
+        <select class="form-control" name="tipo" #tipo="ngModel" [(ngModel)]="objService.tipo">
           <option>1</option>
         </select>
     </div>
     <div class="form-group">
         <label for="descripcion">Descripcion</label>
-        <textarea class="form-control" rows="3" name="descripcion"></textarea>
-    </div>
-    <button type="submit" class="btn btn-outline-success">Grabar</button>
+        <textarea class="form-control" rows="3" name="descripcion" #descripcion="ngModel" [(ngModel)]="objService.descripcion" required></textarea>
+        <small class="form-text msg-error" *ngIf="descripcion.invalid && descripcion.touched">Nombre incorrecto</small>
+      </div>
+    <button type="submit" class="btn btn-outline-success" [disabled]="formService.invalid">Grabar</button>
     <button type="button" class="btn btn-outline-danger ml-2">Cancelar</button>
     <!-- <button type="submit" class="btn btn-primary"></button> -->
 </form>
