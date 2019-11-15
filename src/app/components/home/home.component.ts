@@ -11,6 +11,7 @@ export class HomeComponent implements OnInit {
   public filServicios:Array<Servicio>;
   public mostrar:boolean;
   public tipos:Array<any>;
+  public selected:Number;
   constructor() {
     this.titulo="Servicios";
     this.servicios=[
@@ -28,6 +29,7 @@ export class HomeComponent implements OnInit {
        {id:2,nombre:"Salud"},
        {id:3,nombre:"Hogar"}
      ];
+     this.selected=0;
   }
 
   ngOnInit() {//inicializa el componente 
@@ -36,6 +38,7 @@ export class HomeComponent implements OnInit {
   }
   
   getServices(tipo:number){
+    this.selected=tipo;
     this.filServicios=[];
     if(tipo){//1,2,3
     this.servicios.forEach((item,index)=>{
