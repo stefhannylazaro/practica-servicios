@@ -46,7 +46,7 @@
         </div>
         <div class="col-lg-5 col-md-5">
             <div class="border-f">
-                <app-form-service [title]="subtitle" [objService]="service"></app-form-service>
+                <app-form-service [title]="subtitle" [objService]="service" [type]="'create'"></app-form-service>
             </div>  
         </div>
     </div>
@@ -61,7 +61,7 @@
         </button>
       </div>
       <div class="modal-body">
-            <app-form-service [title]="subtitleEdit" [objService]="serviceEdit"></app-form-service>
+            <app-form-service [title]="subtitleEdit" [objService]="serviceEdit" [type]="'edit'"></app-form-service>
       </div>
 
     </div>

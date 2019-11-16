@@ -7,9 +7,11 @@
     </div>
     <div class="form-group">
         <label for="tipo">Tipo</label>
-        <select class="form-control" name="tipo" #tipo="ngModel" [(ngModel)]="objService.tipo">
-          <option>1</option>
+        <select class="form-control" name="tipo" #tipo="ngModel" [(ngModel)]="objService.tipo" pattern="[1-9][0-9]*">
+          <option value="0" disabled>Seleccione tipo de servicio</option>
+          <option *ngFor="let tipo of tipos" [value]="tipo.id">{{tipo.nombre}}</option>
         </select>
+        <small class="form-text msg-error" *ngIf="tipo.invalid && tipo.touched">Selecione un tipo</small>
     </div>
     <div class="form-group">
         <label for="descripcion">Descripcion</label>
@@ -17,6 +19,6 @@
         <small class="form-text msg-error" *ngIf="descripcion.invalid && descripcion.touched">Nombre incorrecto</small>
       </div>
     <button type="submit" class="btn btn-outline-success" [disabled]="formService.invalid">Grabar</button>
-    <button type="button" class="btn btn-outline-danger ml-2">Cancelar</button>
+    <button type="button" class="btn btn-outline-danger ml-2" *ngIf="type==='create'">Cancelar</button>
     <!-- <button type="submit" class="btn btn-primary"></button> -->
 </form>
