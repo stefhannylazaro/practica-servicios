@@ -10,6 +10,9 @@ export class FormServiceComponent implements OnInit {
   @Input() public objService:Servicio;
   @Input() public type:string;
   public tipos:Array<any>;
+  public showNotification:boolean;
+  public msjNotificacion:String;
+  public typeNotificacion:String;
   //public service:Servicio;
   constructor() {
     //this.objService=new Servicio(0,"","",1);
@@ -18,13 +21,25 @@ export class FormServiceComponent implements OnInit {
       {id:2,nombre:"Salud"},
       {id:3,nombre:"Hogar"}
     ];
+    this.showNotification=false;
+    this.msjNotificacion="";
+    this.typeNotificacion="";
   }
 
   ngOnInit() {
   }
   onSubmit() {
     console.log("enviar");
-    //console.log(this.service);
+    this.showNotification=true;
+    if(this.type=="create"){
+      this.typeNotificacion="success";
+      this.msjNotificacion="Registrado con exito";
+      let servicios=JSON.parse(localStorage.getItem('serviciosL'));
+      servicios.push(this.objService);
+      localStorage.setItem('serviciosL',JSON.stringify(servicios));
+    } else {
+      //editar servicio
+    }
     
   }
 

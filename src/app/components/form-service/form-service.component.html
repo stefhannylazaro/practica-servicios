@@ -22,3 +22,6 @@
     <button type="button" class="btn btn-outline-danger ml-2" *ngIf="type==='create'">Cancelar</button>
     <!-- <button type="submit" class="btn btn-primary"></button> -->
 </form>
+<div class="my-2">
+  <app-notificacion *ngIf="showNotification" [msg]="msjNotificacion" [type]="typeNotificacion"></app-notificacion>
+</div>

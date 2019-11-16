@@ -11,7 +11,7 @@ export class HomeComponent implements OnInit {
   public filServicios:Array<Servicio>;
   public mostrar:boolean;
   public tipos:Array<any>;
-  public selected:Number;
+  public selected:number;
   public display:String;
   public subtitle:String;//para el form
   public subtitleEdit:String;
@@ -39,6 +39,11 @@ export class HomeComponent implements OnInit {
      this.subtitle="Crear";
      this.subtitleEdit="Editar";
      this.service=new Servicio(0,"","",0);
+     if(localStorage.getItem('serviciosL')){
+       console.log("una vez");
+     } else {
+      localStorage.setItem('serviciosL',JSON.stringify(this.servicios));
+     }
   }
 
   ngOnInit() {//inicializa el componente 
@@ -49,6 +54,7 @@ export class HomeComponent implements OnInit {
   getServices(tipo:number){
     this.selected=tipo;
     this.filServicios=[];
+    this.servicios=JSON.parse(localStorage.getItem('serviciosL'));
     if(tipo){//1,2,3
     this.servicios.forEach((item,index)=>{
       if(tipo==item.tipo){
@@ -63,6 +69,12 @@ export class HomeComponent implements OnInit {
   showService(objService){
     this.serviceEdit=objService;
     this.display="block";
+  }
+  deleteService(i:number){
+    this.servicios=JSON.parse(localStorage.getItem('serviciosL'));
+    this.servicios.splice(i,1);
+    localStorage.setItem('serviciosL',JSON.stringify(this.servicios));
+    this.getServices(this.selected);
   }
   closeModal(){
     this.display="none";
