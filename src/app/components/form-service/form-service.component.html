@@ -1,4 +1,4 @@
-<form #formService="ngForm" (ngSubmit)="onSubmit()" *ngIf="objService">
+<form #formService="ngForm" (ngSubmit)="onSubmit(formService)" *ngIf="objService">
     <h5 class="mb-3">{{title}} servicio</h5>
     <div class="form-group">
       <label for="nombre">Nombre</label>

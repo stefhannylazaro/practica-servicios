@@ -28,7 +28,7 @@ export class FormServiceComponent implements OnInit {
 
   ngOnInit() {
   }
-  onSubmit() {
+  onSubmit(form:any) {
     console.log("enviar");
     this.showNotification=true;
     if(this.type=="create"){
@@ -37,6 +37,11 @@ export class FormServiceComponent implements OnInit {
       let servicios=JSON.parse(localStorage.getItem('serviciosL'));
       servicios.push(this.objService);
       localStorage.setItem('serviciosL',JSON.stringify(servicios));
+      setTimeout(()=>{
+        this.showNotification=false;
+        form.reset();
+        this.objService.tipo=0;
+      },2000);
     } else {
       //editar servicio
     }
