@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, DoCheck } from '@angular/core';
 import { Servicio } from '../../models/Servicio';
+import {FormServiceComponent} from '../form-service/form-service.component';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit,AfterViewInit,DoCheck {
   public titulo:string;
   public servicios:Array<Servicio>;
   public filServicios:Array<Servicio>;
@@ -17,6 +19,9 @@ export class HomeComponent implements OnInit {
   public subtitleEdit:String;
   public service:Servicio;//obj para crear serv
   public serviceEdit:Servicio;//obj a editar
+  @ViewChild('nameTitle',{static:false}) nameTitleV:ElementRef;
+  @ViewChild(FormServiceComponent,{static:false}) formC:FormServiceComponent;
+
   constructor() {
     this.titulo="Servicios";
     this.servicios=[
@@ -51,8 +56,24 @@ export class HomeComponent implements OnInit {
   ngOnInit() {//inicializa el componente 
    //console.log(this.servicios);
    this.getServices(0);//todos
+   
   }
-  
+  ngAfterViewInit() {//despues que se inicializa el componente
+    console.log("ngAfterViewInit");
+    console.log(this.nameTitleV.nativeElement);
+    console.log("form desde el padre");
+    // console.log(this.formC.tipos);
+  }
+  ngDoCheck(){//escucha ante cualquier cambio(siempre trae la dta actualizada)
+    console.log("ngDoCheck");
+    if(this.formC){
+      console.log(this.formC);
+      if(this.formC.typeNotificacion==="success"){
+        this.getServices(this.selected);
+        //this.getServices(this.formC.objService.tipo);
+      }
+    }
+  }
   getServices(tipo:number){
     this.selected=tipo;
     this.filServicios=[];

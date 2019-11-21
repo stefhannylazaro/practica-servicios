@@ -28,6 +28,10 @@ export class FormServiceComponent implements OnInit {
 
   ngOnInit() {
   }
+  getInfoOutput(event){
+    console.log(event);//get data component notification
+    this.showNotification=event;
+  }
   onSubmit(form:any) {
     console.log("enviar");
     this.showNotification=true;

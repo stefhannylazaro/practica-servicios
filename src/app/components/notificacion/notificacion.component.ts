@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-notificacion',
@@ -8,10 +8,19 @@ import { Component, OnInit, Input } from '@angular/core';
 export class NotificacionComponent implements OnInit {
   @Input() public msg:string;
   @Input() public type:string;
-
-  constructor() { }
+  @Output() public getInfo= new EventEmitter;//getInfo (instancia de EventEmitter)
+  public show:boolean;
+  constructor() {
+    this.show=false;
+  }
 
   ngOnInit() {
+  }
+
+  emitir(){
+    this.show=false;
+    console.log("emitir");
+    this.getInfo.emit(this.show);//lo que enviare
   }
 
 }
