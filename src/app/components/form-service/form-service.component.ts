@@ -40,7 +40,7 @@ export class FormServiceComponent implements OnInit {
       setTimeout(()=>{
         this.showNotification=false;
         form.reset();
-        this.objService.tipo=0;
+        this.objService.tipo=0;//set select tipo 0
       },2000);
     } else {
       //editar servicio

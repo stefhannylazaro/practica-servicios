@@ -9,3 +9,7 @@
     background: #ffecec;
     color: red;
 }
+.btn-close{
+    background: none;
+    border:none;
+}

@@ -44,6 +44,8 @@ export class HomeComponent implements OnInit {
      } else {
       localStorage.setItem('serviciosL',JSON.stringify(this.servicios));
      }
+     //localStorage.setItem('serviciosL',JSON.stringify(this.servicios));//crear - update
+     //JSON.parse(localStorage.getItem('serviciosL'));
   }
 
   ngOnInit() {//inicializa el componente 
