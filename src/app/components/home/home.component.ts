@@ -1,11 +1,12 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, DoCheck } from '@angular/core';
 import { Servicio } from '../../models/Servicio';
 import {FormServiceComponent} from '../form-service/form-service.component';
-
+import { FirestoreService } from '../../services/firestore/firestore.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  providers:[FirestoreService]//ya no es necesario ahora
 })
 export class HomeComponent implements OnInit,AfterViewInit,DoCheck {
   public titulo:string;
@@ -22,7 +23,9 @@ export class HomeComponent implements OnInit,AfterViewInit,DoCheck {
   @ViewChild('nameTitle',{static:false}) nameTitleV:ElementRef;
   @ViewChild(FormServiceComponent,{static:false}) formC:FormServiceComponent;
 
-  constructor() {
+  constructor(
+    private _firestoreService:FirestoreService
+  ) {
     this.titulo="Servicios";
     this.servicios=[
       new Servicio(1,'Auto','abc',1),
@@ -56,7 +59,7 @@ export class HomeComponent implements OnInit,AfterViewInit,DoCheck {
   ngOnInit() {//inicializa el componente 
    //console.log(this.servicios);
    this.getServices(0);//todos
-   
+   this.getServicesFire();
   }
   ngAfterViewInit() {//despues que se inicializa el componente
     console.log("ngAfterViewInit");
@@ -65,15 +68,34 @@ export class HomeComponent implements OnInit,AfterViewInit,DoCheck {
     // console.log(this.formC.tipos);
   }
   ngDoCheck(){//escucha ante cualquier cambio(siempre trae la dta actualizada)
-    console.log("ngDoCheck");
+    //console.log("ngDoCheck");
     if(this.formC){
-      console.log(this.formC);
+      //console.log(this.formC);
       if(this.formC.typeNotificacion==="success"){
         this.getServices(this.selected);
         //this.getServices(this.formC.objService.tipo);
       }
     }
   }
+  getServicesFire(){
+    this._firestoreService.getServices().subscribe(
+      (result)=>{
+        let servicioF=[];
+        console.log(result);
+        result.forEach((item:any)=>{
+          servicioF.push({
+            id:item.payload.doc.id,
+            nombre: item.payload.doc.data().nombre,
+            descripcion: item.payload.doc.data().descripcion,
+            tipo: item.payload.doc.data().tipo
+          });
+        });
+        console.log(servicioF);   
+      },
+      (error)=>{}
+    );
+  }
+  
   getServices(tipo:number){
     this.selected=tipo;
     this.filServicios=[];
