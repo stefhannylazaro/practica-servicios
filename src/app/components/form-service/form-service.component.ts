@@ -41,6 +41,7 @@ export class FormServiceComponent implements OnInit {
       let servicios=JSON.parse(localStorage.getItem('serviciosL'));
       servicios.push(this.objService);
       localStorage.setItem('serviciosL',JSON.stringify(servicios));
+      document.getElementById('menu'+this.objService.tipo).click();//direccionar 
       setTimeout(()=>{
         this.showNotification=false;
         form.reset();

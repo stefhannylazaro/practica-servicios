@@ -66,13 +66,13 @@ export class HomeComponent implements OnInit,AfterViewInit,DoCheck {
   }
   ngDoCheck(){//escucha ante cualquier cambio(siempre trae la dta actualizada)
     console.log("ngDoCheck");
-    if(this.formC){
-      console.log(this.formC);
-      if(this.formC.typeNotificacion==="success"){
-        this.getServices(this.selected);
-        //this.getServices(this.formC.objService.tipo);
-      }
-    }
+    // if(this.formC){
+    //   console.log(this.formC);
+    //   if(this.formC.typeNotificacion==="success"){
+    //     this.getServices(this.selected);
+    //     //this.getServices(this.formC.objService.tipo);
+    //   }
+    // }
   }
   getServices(tipo:number){
     this.selected=tipo;

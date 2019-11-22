@@ -20,7 +20,7 @@
                         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                     </li> -->
                         <li class="nav-item" *ngFor="let item of tipos">
-                            <a class="nav-link" href="#" (click)="getServices(item.id)"
+                            <a class="nav-link" href="#" (click)="getServices(item.id)" [id]="'menu'+item.id"
                              [class.active]="item.id==selected">{{item.nombre}}</a>
                         </li>
                     </ul>
