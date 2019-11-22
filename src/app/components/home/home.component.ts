@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, DoCheck } from '@angular/core';
 import { Servicio } from '../../models/Servicio';
 import {FormServiceComponent} from '../form-service/form-service.component';
+import {FirestoreService} from '../../services/firestore/firestore.service';
 
 @Component({
   selector: 'app-home',
@@ -22,7 +23,9 @@ export class HomeComponent implements OnInit,AfterViewInit,DoCheck {
   @ViewChild('nameTitle',{static:false}) nameTitleV:ElementRef;
   @ViewChild(FormServiceComponent,{static:false}) formC:FormServiceComponent;
 
-  constructor() {
+  constructor(
+    private _firestoreService:FirestoreService
+  ) {
     this.titulo="Servicios";
     this.servicios=[
       new Servicio(1,'Auto','abc',1),
@@ -56,7 +59,7 @@ export class HomeComponent implements OnInit,AfterViewInit,DoCheck {
   ngOnInit() {//inicializa el componente 
    //console.log(this.servicios);
    this.getServices(0);//todos
-   
+   this.getServiceFirebase();
   }
   ngAfterViewInit() {//despues que se inicializa el componente
     console.log("ngAfterViewInit");
@@ -88,6 +91,24 @@ export class HomeComponent implements OnInit,AfterViewInit,DoCheck {
       this.filServicios=this.servicios;
       console.log(this.filServicios);
     }
+  }
+  getServiceFirebase(){
+    console.log("firebase");
+    this._firestoreService.getServices().subscribe(
+      (result)=>{
+        let serviceFirebase=[];
+        result.forEach((item)=>{
+          console.log(item);
+          serviceFirebase.push({
+            id: item.payload.doc.id,
+            tipo: item.payload.doc.data().tipo,
+            descripcion: item.payload.doc.data().descripcion
+          });  
+        })
+        console.log(serviceFirebase);//array service response firebase
+      },
+      (error)=>{}
+    );
   }
   showService(objService){
     this.serviceEdit=objService;
