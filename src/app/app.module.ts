@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {FormsModule} from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms'
 import {appRoutingProviders,routing} from './app.routing';
 import { AngularFireModule } from '@angular/fire';
 import {environment} from '../environments/environment';
@@ -11,6 +12,7 @@ import { HomeComponent } from './components/home/home.component';
 import { C404Component } from './components/c404/c404.component';
 import { FormServiceComponent } from './components/form-service/form-service.component';
 import { NotificacionComponent } from './components/notificacion/notificacion.component';
+import { RegistroComponent } from './components/registro/registro.component';
 
 @NgModule({
   declarations: [
@@ -18,11 +20,13 @@ import { NotificacionComponent } from './components/notificacion/notificacion.co
     HomeComponent,
     C404Component,
     FormServiceComponent,
-    NotificacionComponent
+    NotificacionComponent,
+    RegistroComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     routing,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule
